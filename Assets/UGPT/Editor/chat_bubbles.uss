@@ -1,0 +1,31 @@
+
+#root {
+	width:600px;
+	/*height:00px;*/
+
+	background-color: #161616;
+
+	padding: 10px;
+	margin: 10px;
+
+	/*border-color: red;
+	border-width: 1px 1px 1px 1px;
+*/
+}
+
+
+#label{
+	white-space:normal;
+}
+
+/*#bubble_User {
+	background-color: #323232;
+	-unity-text-align: middle-right;
+	white-space: normal;
+}
+
+#bubble_GPT {
+	background-color: #161616;
+	white-space:normal;
+}
+*/
