@@ -9,7 +9,7 @@ using UnityEditor.UIElements;
 using OpenAI_API;
 using System.Threading.Tasks;
 using OpenAI_API.Chat;
-
+using System.IO;
 
 public struct ConversationBubble
 {
@@ -17,25 +17,82 @@ public struct ConversationBubble
     public string message;
 }
 
+public static class EnvLoader
+{
+    static Dictionary<string, string> variables = new Dictionary<string, string>();
+
+    public static bool LoadEnviormentVariables()
+    {
+        string path = Path.Combine(Application.dataPath,"..", ".env");
+
+        if (!File.Exists(path))
+        {
+            Debug.LogWarning("Env File Doesnt Exist!");
+            return false;
+        }
+
+        string[] lines  = File.ReadAllLines(path);
+
+        // clear anything in the table prev stored
+        variables = new Dictionary<string, string>();
+
+        foreach (string line in lines) {
+
+            // ignore empty lines or '#' commented lines
+            if (string.IsNullOrEmpty(line) || line.StartsWith('#'))
+                continue;
+
+            string[] parts = line.Split('=');
+
+            if(parts.Length == 2)
+            {
+                variables[parts[0]] = parts[1];
+            }
+
+        }
+
+        return true;
+    }
+
+    public static string GetVariable(string name)
+    {
+        if (variables.ContainsKey(name))
+            return variables[name];
+        else 
+            return null;
+    }
+
+}
+
+
 public class AssistantView : EditorWindow
 {
     [MenuItem("Open AI/GPT Assistant")]
     public static void Open()
     {
-        if(instance != null)
+        bool success = EnvLoader.LoadEnviormentVariables();
+        if (!success)
+        {
+            Debug.LogError("NO ENV!");
+            return;
+        }
+
+        if (instance != null)
         {
             Debug.LogError("Cannot Open Multiple Instances of GPT assistant view");
             return;
         }
 
         instance = GetWindow<AssistantView>();
+
     }
 
     OpenAIAPI api;
 
     private void OnEnable()
     {
-        api = new OpenAIAPI("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");
+      
+        api = new OpenAIAPI(EnvLoader.GetVariable("GPT_KEY"));
 
         if (api == null)
             Debug.Log("<color=red>FATAL ERROR</color> OpenAI Connection Could not be made...");
