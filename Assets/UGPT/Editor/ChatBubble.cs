@@ -1,33 +1,35 @@
-﻿using System;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEditor;
 using UnityEngine.UIElements;
 
 public class ChatBubble : VisualElement
 {
+    private Label messageLabel;
+
     public ChatBubble()
     {
-        // Create a chat bubble container element
-        var root = new VisualElement();
-        root.name = "root";
-        root.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/UGPT/Editor/chat_bubbles.uss"));
+        styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/UGPT/Editor/chat_bubbles.uss"));
+        AddToClassList("chat-bubble");
 
-
-        var bubble = new VisualElement();
-        bubble.name = "bubble";
-
-        message = new Label();
-        message.name = "label";
-        message.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt nulla quam, ut faucibus lectus lobortis id. Sed non ipsum justo. Fusce id eros sed tellus tincidunt pulvinar et id sem. Donec fringilla, tortor a sagittis tincidunt, odio mauris elementum erat, in placerat tortor nisi et diam.";
-        
-        // build tree element
-        bubble.Add(message);    
-        root.Add(bubble);
-        Add(root);
-
-        
+        messageLabel = new Label();
+        Add(messageLabel);
     }
 
-    public Label message;
+    public void UpdateMessage(string message)
+    {
+        messageLabel.text = message;
+    }
 
+    public void SetIsUser(bool isUser)
+    {
+        if (isUser)
+        {
+            AddToClassList("user");
+            RemoveFromClassList("assistant");
+        }
+        else
+        {
+            AddToClassList("assistant");
+            RemoveFromClassList("user");
+        }
+    }
 }

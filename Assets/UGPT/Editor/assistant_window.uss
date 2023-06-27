@@ -1,21 +1,8 @@
-/*#inputArea{
-	flex-direction: column;
-	background-color: red;
-}
-*/
-/*#inputArea */
-/*textField {
-	background-color: yellow;
-	flex-grow: 1;
-}
-*/
-
 
 
 #inputArea {
-	padding: 5px;
 	flex-direction:row;
-	background-color: #161616;
+	background-color: #343640;
 }
 
 #prompt_field {
@@ -24,25 +11,34 @@
 
 
 #ChatBubble_User {
-/*	border-color: pink;
-	border-width: 1px 1px 1px 1px;
-	*/
-	margin: 10px 10px 10px auto;
+
+	width: 100%;
 	white-space:normal;
+
+	background-color: #343640;
 }
 
+
+
 #ChatBubble_Assistant {
-	/*border-color: orange;
-	border-width: 1px 1px 1px 1px;
-	*/
-	margin: 10px auto 10px 10px;
+
+	width:100%;
+
 	white-space:normal;
+
+	background-color: #444654;
+
 }
 
 #ChatBubble_User :hover :active :checked :focus {
-	background-color: #161616;
+background-color: #343640;
 }
 
 #ChatBubble_Assistant :hover :active :checked :focus {
-	background-color: #161616;
+	background-color: #444654;
+}
+
+
+#chats_container{
+	background-color: #202123;
 }

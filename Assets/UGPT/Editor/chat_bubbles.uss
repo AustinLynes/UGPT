@@ -1,16 +1,20 @@
 
-#root {
-	width:600px;
-	/*height:00px;*/
+#root_user {
+	width:100%;
 
-	background-color: #161616;
+	background-color: #343640;
 
 	padding: 10px;
-	margin: 10px;
 
-	/*border-color: red;
-	border-width: 1px 1px 1px 1px;
-*/
+}
+#root_assistant {
+	/*width:600px;*/
+	width:100%;
+
+	background-color: #444654;
+
+
+	padding: 10px;
 }
 
 
@@ -18,14 +22,3 @@
 	white-space:normal;
 }
 
-/*#bubble_User {
-	background-color: #323232;
-	-unity-text-align: middle-right;
-	white-space: normal;
-}
-
-#bubble_GPT {
-	background-color: #161616;
-	white-space:normal;
-}
-*/
